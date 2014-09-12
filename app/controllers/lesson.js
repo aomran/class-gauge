@@ -7,11 +7,10 @@ export default Ember.Controller.extend({
 			var survey = this.store.createRecord('survey', {
 				timestamp: new Date()
 			});
-			survey.save().then(function(){
-				lesson.get('surveys').then(function(surveys){
-					surveys.addObject(survey);
-					lesson.save();
-				});
+			lesson.get('surveys').then(function(surveys){
+				surveys.addObject(survey);
+				lesson.save();
+				survey.save();
 			});
 		}
 	}
