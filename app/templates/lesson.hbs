@@ -1,3 +1,11 @@
 <p>
-	The name of the lesson is {{name}}
+	The name of the lesson is <strong>{{model.name}}</strong>
+</p>
+
+<p>
+	This lesson has {{model.surveyCount}} surveys.
+</p>
+
+<p>
+	<button {{action "createSurvey"}}>Poll!</button>
 </p>
