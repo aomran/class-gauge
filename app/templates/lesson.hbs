@@ -8,8 +8,7 @@
 
 {{#each survey in model.surveys}}
 	{{!-- Lets put a component here! --}}
-	<p>{{survey.yesVotes}} people said yes!</p>
-	<p>{{survey.noVotes}} people said no!</p>
+	{{pie-chart data=survey.chartData}}
 	<button {{action "sayYes" survey}}>Yes!</button>
 	<button {{action "sayNo" survey}}>No!</button>
 {{else}}

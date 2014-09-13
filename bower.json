@@ -12,6 +12,7 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "~1.15.0",
-    "emberfire": "~1.2.1"
+    "emberfire": "~1.2.1",
+    "chartjs": "v1.0.1-beta.2"
   }
 }
