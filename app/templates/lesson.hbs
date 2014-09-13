@@ -6,6 +6,16 @@
 	This lesson has {{model.surveys.length}} surveys.
 </p>
 
+{{#each survey in model.surveys}}
+	{{!-- Lets put a component here! --}}
+	<p>{{survey.yesVotes}} people said yes!</p>
+	<p>{{survey.noVotes}} people said no!</p>
+	<button {{action "sayYes" survey}}>Yes!</button>
+	<button {{action "sayNo" survey}}>No!</button>
+{{else}}
+	<p>No Surveys! Poll to get started.</p>
+{{/each}}
+
 <p>
 	<button {{action "createSurvey"}}>Poll!</button>
 </p>
