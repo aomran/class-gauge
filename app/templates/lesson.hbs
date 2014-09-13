@@ -8,7 +8,7 @@
 
 {{#each survey in model.surveys}}
 	{{!-- Lets put a component here! --}}
-	{{pie-chart data=survey.chartData}}
+	{{ember-chart data=survey.chartData type='pie' width=200 height=200}}
 	<button {{action "sayYes" survey}}>Yes!</button>
 	<button {{action "sayNo" survey}}>No!</button>
 {{else}}

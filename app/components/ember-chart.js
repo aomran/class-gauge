@@ -4,8 +4,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 	tagName: 'canvas',
 	attributeBindings: ['width', 'height'],
-	width: 100,
-	height: 100,
 
 	didInsertElement: function(){
     this.renderChart();
@@ -13,6 +11,9 @@ export default Ember.Component.extend({
 	renderChart: function(){
 		var context = this.get('element').getContext('2d');
     var data = this.get('data');
-    new Chart(context).Pie(data);
+    var type = this.get('type').capitalize();
+    var options = Ember.merge({}, this.get('options'));
+
+    new Chart(context)[type](data, options);
 	}.observes('data')
 });
