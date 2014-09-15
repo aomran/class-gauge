@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+<title>untitled</title>
+<link rel="stylesheet" href="" />
+</head>
+<body>
+
+<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+<script>
+	var first_time = true;
+	var ref = new Firebase("https://class-gauge.firebaseio.com/");
+	ref.child("lessons/-JWq6qKR2Bp1Rkuu3pjt/surveys").limit(1).on("child_added", function(snapshot) {
+
+		if( first_time ) {
+			first_time = false; 
+		} else {
+			var survey = ref.child("surveys/"+snapshot.name());
+			if (confirm('How are you feeling -- are you fine to move on?')) {
+					survey.child('yesVotes').transaction(function(votes){
+						return votes+1;
+					})
+			} else {
+			  survey.child('noVotes').transaction(function(votes){
+			  	return votes+1;
+			  })
+			}
+		}
+	  
+	});
+</script>
+</body>
+</html>

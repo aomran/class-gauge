@@ -10,7 +10,9 @@ export default Ember.Controller.extend({
 			lesson.get('surveys').then(function(surveys){
 				surveys.addObject(survey);
 				lesson.save();
-				survey.save();
+				survey.save().then(function(survey){
+					survey.reload();
+				});
 			});
 		},
 		sayYes: function(survey){
