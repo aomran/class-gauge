@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	sortProperties: ['timestamp:desc'],
+	sortedSurveys: Ember.computed.sort('model.surveys', 'sortProperties'),
 	actions: {
 		createSurvey: function(){
 			var lesson = this.get('model');
