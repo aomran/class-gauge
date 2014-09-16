@@ -1,27 +1,38 @@
-<p>
-	The name of the lesson is <strong>{{model.name}}</strong>
-</p>
-
-<p>
-	This lesson has {{model.surveys.length}} surveys.
-</p>
-
-{{#each survey in model.surveys}}
-  <div class="col-md-4">
-    <div class="panel panel-default">
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-info">
+      
       <div class="panel-heading">
-        {{format-date survey.timestamp}}
+        <h3 class="panel-title">Lesson: {{model.name}}</h3>
       </div>
-
+      
       <div class="panel-body">
-        {{ember-chart data=survey.chartData type='pie' width=200 height=200}}
+        <p class="text-muted">
+          This lesson has {{model.surveys.length}} surveys.
+        </p>
+        <p class="text-muted">
+          Clicking "Poll!" will cause a dialog box to open up in-front of everyone who is viewing your slides.
+        </p>
+        <button class="btn btn-success" {{action "createSurvey"}}>Poll!</button>
       </div>
     </div>
   </div>
-{{else}}
-	<p>No Surveys! Poll to get started.</p>
-{{/each}}
+</div>
 
-<p>
-	<button {{action "createSurvey"}}>Poll!</button>
-</p>
+<div class="row">
+  {{#each survey in model.surveys}}
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {{format-date survey.timestamp}}
+        </div>
+
+        <div class="panel-body">
+          {{ember-chart data=survey.chartData type='pie' width=200 height=200 class='center-block'}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p>No Surveys! Poll to get started.</p>
+  {{/each}}
+</div>
