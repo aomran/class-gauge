@@ -7,10 +7,22 @@
 </p>
 
 {{#each survey in model.surveys}}
-	{{!-- Lets put a component here! --}}
-	{{ember-chart data=survey.chartData type='pie' width=200 height=200}}
-	<button {{action "sayYes" survey}}>Yes!</button>
-	<button {{action "sayNo" survey}}>No!</button>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{input type='text' value=survey.name}}
+        <button {{action "saveSurvey" survey}}>Save</button>
+      </div>
+
+      <div class="panel-body">
+        {{ember-chart data=survey.chartData type='pie' width=200 height=200}}
+      </div>
+
+      <div class="panel-footer">
+        <p>This survey was started on {{survey.timestamp}}</p>
+      </div>
+    </div>
+  </div>
 {{else}}
 	<p>No Surveys! Poll to get started.</p>
 {{/each}}

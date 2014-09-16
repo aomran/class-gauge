@@ -15,12 +15,7 @@ export default Ember.Controller.extend({
 				});
 			});
 		},
-		sayYes: function(survey){
-			survey.incrementProperty('yesVotes');
-			survey.save();
-		},
-		sayNo: function(survey){
-			survey.incrementProperty('noVotes');
+		saveSurvey: function(survey){
 			survey.save();
 		}
 	}
