@@ -1,19 +1,27 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-info">
+  <div class="col-md-6">
+    <div class="panel panel-info panel-custom">
       
       <div class="panel-heading">
-        <h3 class="panel-title">Lesson: {{model.name}}</h3>
+        <h3 class="panel-title">{{model.name}}</h3>
       </div>
       
       <div class="panel-body">
         <p class="text-muted">
-          This lesson has {{model.surveys.length}} surveys.
-        </p>
-        <p class="text-muted">
           Clicking "Poll!" will cause a dialog box to open up in-front of everyone who is viewing your slides.
         </p>
-        <button class="btn btn-success" {{action "createSurvey"}}>Poll!</button>
+        <button class="center-block btn btn-success btn-lg" {{action "createSurvey"}}>Poll my students!</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-info panel-custom">
+      <div class="panel-heading">
+        Put the following code just before the &lt;body/&gt; tag of your HTML slides.
+      </div>
+      <div class="panel-body">
+        {{zero-clipboard text='hello world!' label="Copy"}}
       </div>
     </div>
   </div>

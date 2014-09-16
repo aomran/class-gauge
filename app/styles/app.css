@@ -1,3 +1,7 @@
-html, body {
-  margin: 20px;
+.textarea-custom {
+	margin-bottom: 5px;
+}
+
+.panel-custom {
+	min-height: 190px;
 }
