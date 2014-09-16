@@ -10,16 +10,11 @@
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        {{input type='text' value=survey.name}}
-        <button {{action "saveSurvey" survey}}>Save</button>
+        {{format-date survey.timestamp}}
       </div>
 
       <div class="panel-body">
         {{ember-chart data=survey.chartData type='pie' width=200 height=200}}
-      </div>
-
-      <div class="panel-footer">
-        <p>This survey was started on {{survey.timestamp}}</p>
       </div>
     </div>
   </div>

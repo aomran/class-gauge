@@ -1,7 +1,6 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  name: DS.attr('string'),
   timestamp: DS.attr('date'),
   yesVotes: DS.attr('number', {defaultValue: 0}),
   noVotes: DS.attr('number', {defaultValue: 0}),

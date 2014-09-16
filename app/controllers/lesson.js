@@ -14,9 +14,6 @@ export default Ember.Controller.extend({
 					survey.reload();
 				});
 			});
-		},
-		saveSurvey: function(survey){
-			survey.save();
 		}
 	}
 });
