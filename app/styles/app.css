@@ -5,3 +5,8 @@
 .panel-custom {
 	min-height: 190px;
 }
+
+.glyphicon-custom {
+	font-size: 40px;
+  line-height: 1.33;
+}

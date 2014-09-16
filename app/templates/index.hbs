@@ -1,4 +1,42 @@
-<h2>Create your lesson now!</h2>
+<div class="row">
+	<div class="col-md-4">
+		<div class="panel panel-primary panel-custom">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Step 1: Create a lesson</h3>
+		  </div>
+		  <div class="panel-body text-center">
+		  	<span class="glyphicon glyphicon-edit glyphicon-custom"></span>
+		    <div class="input-group">
+		      {{input type="text" class="form-control" placeholder="Lesson name..." value=lessonName action="createLesson" on="enter"}}
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" {{action "createLesson"}}>Create Lesson</button>
+		      </span>
+		    </div>
+		  </div>
+		</div>
+	</div>
 
-{{input type="text" value=lessonName action="createLesson" on="enter"}}
-<button {{action "createLesson"}}>Create Lesson</button>
+	<div class="col-md-4">
+		<div class="panel panel-warning panel-custom">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Step 2: Copy code into your slides</h3>
+		  </div>
+		  <div class="panel-body text-center">
+		    <span class="glyphicon glyphicon-file glyphicon-custom"></span>
+		    <p class="text-muted">The code will be available for you to copy on the next page.</p>
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-info panel-custom">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Step 3: Poll your students</h3>
+		  </div>
+		  <div class="panel-body text-center">
+		    <span class="glyphicon glyphicon-stats glyphicon-custom"></span>
+		    <p class="text-muted">It's as simple as clicking one button.</p>
+		  </div>
+		</div>
+	</div>
+</div>

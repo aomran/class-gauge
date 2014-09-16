@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-warning panel-custom">
+      <div class="panel-heading">
+        <h3 class="panel-title">Step 2: Insert code before the <code>&lt;body/&gt;</code> tag</h3>
+      </div>
+      <div class="panel-body">
+        {{zero-clipboard text='hello world!' label="Copy"}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-success panel-custom">
+      
+      <div class="panel-heading">
+        <h3 class="panel-title">Step 3: Poll students about <strong>{{model.name}}</strong></h3>
+      </div>
+      
+      <div class="panel-body">
+        <p class="text-muted">
+          Clicking "Poll!" will cause a dialog box to open up in-front of everyone who is viewing your slides.
+        </p>
+        <button class="center-block btn btn-success btn-lg" {{action "createSurvey"}}>Poll my students!</button>
+      </div>
+    </div>
+  </div>
+</div>
