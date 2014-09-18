@@ -8,19 +8,36 @@
 </head>
 <body>
 <script>
-	var LESSON_ID = '-JX-GSSicqcpOSaO25K9';
-	var classGauge = function(){
-		var first_time = true;
-		var ref = new Firebase("https://class-gauge.firebaseio.com/");
-		var surveys = ref.child('lessons/'+ LESSON_ID + '/surveys').limit(1);
-		
-		surveys.on("child_added", function(snapshot) {
-			first_time ? (first_time = false) : initSurvey(snapshot);
-		});
+	var ClassGauge = {
+		lesson_id: '-JX-GSSicqcpOSaO25K9',
+		ref: null,
+		init: function(){
+			var first_time = true;
+			ClassGauge.ref = new Firebase("https://class-gauge.firebaseio.com/");
+			var surveys = ClassGauge.ref.child('lessons/'+ ClassGauge.lesson_id + '/surveys').limit(1);
+			
+			surveys.on("child_added", function(snapshot) {
+				first_time ? (first_time = false) : ClassGauge.startSurvey(snapshot);
+			});
+		},
+		startSurvey: function(snapshot){
+			ClassGauge.addName(snapshot.name());
+			ClassGauge.overlay();
+		},
+		addName: function(name){
+			document.getElementById("dialog-overlay").setAttribute('name', name);
+		},
+		overlay: function() {
+			var el = document.getElementById("dialog-overlay");
+			el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		},
 
-		var initSurvey = function(snapshot){
-			var survey = ref.child("surveys/"+snapshot.name());
-			if (confirm('How are you feeling -- are you fine to move on?')) {
+		surveyVote: function(button){
+			var name = document.getElementById("dialog-overlay").getAttribute('name');
+			var survey = ClassGauge.ref.child("surveys/"+name);
+			ClassGauge.overlay();
+
+			if (button === 'yes') {
 				survey.child('yesVotes').transaction(function(votes){
 					return votes+1;
 				})
@@ -29,12 +46,23 @@
 			  	return votes+1;
 			  })
 			}
-		};
-	}
+		}
+	};
+
+	var dialog="";
+	dialog += "<div id=\"dialog-overlay\" style=\"visibility:hidden;position: absolute;top:0;left:0;background-color: rgba(0,0,0,0.6);width:100%;height:100%;z-index:1000\">";
+	dialog += "  <div style=\"width:400px;height:150px;position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;box-shadow:0px 2px 7px #292929;border-radius: 10px;background-color:#f2f2f2;border:1px solid #fff;padding:15px;text-align:center;\">";
+	dialog += "  	<p>How is the lesson so far -- should we keep going or go over this one more time?<\/p>";
+	dialog += "  	<button onclick=\"ClassGauge.surveyVote('yes')\">Keep going<\/button>";
+	dialog += "  	<button onclick=\"ClassGauge.surveyVote('no')\">Review<\/button>";
+	dialog += "  <\/div>";
+	dialog += "<\/div>";
+	document.getElementsByTagName('body')[0].insertAdjacentHTML('afterend', dialog);
+
 	var s=document.createElement('script');
 	s.type='text/javascript';
 	s.src='https://cdn.firebase.com/js/client/1.0.21/firebase.js';
-	s.onload = classGauge;
+	s.onload = ClassGauge.init;
 	document.getElementsByTagName('head')[0].appendChild(s);
 </script>
 </body>
