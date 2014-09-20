@@ -2,33 +2,21 @@ window.ClassGauge = {
 	ref: null,
 	LESSON_ID: null,
 	init: function(){
-		// Insert the dialog box markup
-		ClassGauge.addDialog();
-
-		// Set Lesson ID
-		ClassGauge.getLessonID();
+		ClassGauge.addDialog().setLessonID().setFirebase();
 
 		// Listen for survey polls
 		var first_time = true;
-		ClassGauge.ref = new Firebase("https://class-gauge.firebaseio.com/");
 		var surveys = ClassGauge.ref.child('lessons/'+ ClassGauge.LESSON_ID + '/surveys').limit(1);
 		surveys.on("child_added", function(snapshot) {
 			first_time ? (first_time = false) : ClassGauge.startSurvey(snapshot);
 		});
 	},
 	startSurvey: function(snapshot){
-		ClassGauge.addName(snapshot.name());
-		ClassGauge.overlay();
+		this.addName(snapshot.name());
+		this.overlay();
 	},
 	addName: function(name){
 		document.querySelector("#dialog-overlay").setAttribute('name', name);
-	},
-	getLessonID: function(){
-		if (this.LESSON_ID) {
-			return;
-		} else{
-			return this.LESSON_ID = document.querySelector('script[data-id="ClassGauge"][data-token]').getAttribute('data-token');
-		};
 	},
 	overlay: function() {
 		var el = document.querySelector("#dialog-overlay");
@@ -36,8 +24,8 @@ window.ClassGauge = {
 	},
 	surveyVote: function(button){
 		var name = document.querySelector("#dialog-overlay").getAttribute('name');
-		var survey = ClassGauge.ref.child("surveys/"+name);
-		ClassGauge.overlay();
+		var survey = this.ref.child("surveys/"+name);
+		this.overlay();
 
 		if (button === 'yes') {
 			survey.child('yesVotes').transaction(function(votes){
@@ -59,7 +47,15 @@ window.ClassGauge = {
 		dialog += "  <\/div>";
 		dialog += "<\/div>";
 		document.querySelector('body').insertAdjacentHTML('afterend', dialog);
-	}
+		return this;
+	},
+	setLessonID: function(){
+		this.LESSON_ID = this.LESSON_ID || document.querySelector('script[data-id="ClassGauge"][data-token]').getAttribute('data-token');
+		return this;
+	},
+	setFirebase: function(){
+		this.ref = new Firebase("https://class-gauge.firebaseio.com/");
+	},
 };
 
 var s=document.createElement('script');
