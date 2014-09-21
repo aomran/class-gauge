@@ -5,7 +5,8 @@
         <h3 class="panel-title">Step 2: Insert code before the <code>&lt;body/&gt;</code> tag</h3>
       </div>
       <div class="panel-body">
-        {{zero-clipboard text=lessonCode label="Copy"}}
+        {{textarea value=lessonCode class="form-control textarea-custom" rows="2" disabled=true}}
+        {{zero-clipboard text=lessonCode label="Copy" class="btn btn-default"}}
       </div>
     </div>
   </div>
