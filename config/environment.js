@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    modulePrefix: 'class-gauge',
     firebase_instance: 'class-gauge',
     environment: environment,
     baseURL: '/',
