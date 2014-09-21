@@ -11,13 +11,13 @@ export default DS.Model.extend({
   			value: this.get('yesVotes'),
   			color: "#46BFBD",
   			highlight: "#5AD3D1",
-  			label: "Yes!"
+  			label: "Keep going!"
   		},
   		{
   			value: this.get('noVotes'),
   			color: "#FDB45C",
   			highlight: "#FFC870",
-  			label: "No :("
+  			label: "Review"
   		}
   	];
   }.property('yesVotes', 'noVotes')

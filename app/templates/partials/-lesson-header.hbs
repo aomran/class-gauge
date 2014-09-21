@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <div class="panel panel-warning panel-custom">
+    <div class="panel panel-info panel-custom">
       <div class="panel-heading">
-        <h3 class="panel-title">Step 2: Insert code before the <code>&lt;body/&gt;</code> tag</h3>
+        <h3 class="panel-title">Step 2: Insert code anywhere in HTML slides.</h3>
       </div>
       <div class="panel-body">
         {{textarea value=lessonCode class="form-control textarea-custom" rows="2" disabled=true}}
@@ -20,7 +20,7 @@
       
       <div class="panel-body">
         <p class="text-muted">
-          Clicking "Poll!" will cause a dialog box to open up in-front of everyone who is viewing your slides.
+          Clicking "Poll my students!" will ask all viewers of your slides: "How is the lesson so far -- should we keep going or go over this one more time?".
         </p>
         <button class="center-block btn btn-success btn-lg" {{action "createSurvey"}}>Poll my students!</button>
       </div>
