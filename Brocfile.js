@@ -16,8 +16,6 @@ var app = new EmberApp();
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
-app.import('bower_components/zeroclipboard/dist/ZeroClipboard.js');
-app.import('bower_components/zeroclipboard/dist/ZeroClipboard.swf', {destDir: 'assets'});
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {destDir: 'fonts'});
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {destDir: 'fonts'});
