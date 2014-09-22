@@ -1,0 +1,9 @@
+{
+  "firebase": "class-gauge",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

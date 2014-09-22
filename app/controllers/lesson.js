@@ -19,6 +19,6 @@ export default Ember.Controller.extend({
 		}
 	},
 	lessonCode: function(){
-		return '<script async data-id="ClassGauge" data-token="' + this.get('model.id') + '" src="/assets/voting_client.js"></script>';
+		return '<script async data-id="ClassGauge" data-token="' + this.get('model.id') + '" src="https://class-gauge.firebaseapp.com/assets/voting_client.js"></script>';
 	}.property('model.id')
 });
