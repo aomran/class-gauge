@@ -5,10 +5,16 @@ window.ClassGauge = {
 		ClassGauge.addDialog().setLessonID().setFirebase();
 
 		// Listen for survey polls
-		var first_time = true;
-		var surveys = ClassGauge.ref.child('lessons/'+ ClassGauge.LESSON_ID + '/surveys').limit(1);
-		surveys.on("child_added", function(snapshot) {
-			first_time ? (first_time = false) : ClassGauge.startSurvey(snapshot);
+		var surveys,
+			surveysLength,
+			first_time = true;
+		
+		surveys = ClassGauge.ref.child('lessons/'+ ClassGauge.LESSON_ID + '/surveys');
+		surveys.once('value', function(snapshot){
+			surveysLength = snapshot.numChildren();
+		});
+		surveys.limit(1).on("child_added", function(snapshot) {
+			(first_time && surveysLength) ? (first_time = false) : ClassGauge.startSurvey(snapshot);
 		});
 	},
 	startSurvey: function(snapshot){
@@ -40,8 +46,8 @@ window.ClassGauge = {
 	addDialog: function(){
 		var dialog="";
 		dialog += "<div id=\"dialog-overlay\" style=\"visibility:hidden;position: absolute;top:0;left:0;background-color: rgba(0,0,0,0.6);width:100%;height:100%;z-index:1000\">";
-		dialog += "  <div style=\"width:400px;height:300px;position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;box-shadow:0px 2px 7px #292929;border-radius: 10px;background-color:#f2f2f2;border:1px solid #fff;padding:15px;text-align:center;\">";
-		dialog += "  	<p>How is the lesson so far -- should we keep going or go over this one more time?<\/p>";
+		dialog += "  <div style=\"width:400px;height:225px;position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;box-shadow:0px 2px 7px #292929;border-radius: 10px;background-color:#f2f2f2;border:1px solid #fff;padding:15px;text-align:center;\">";
+		dialog += "  	<p style=\"font-size:25px;font-family:sans-serif\">How is the lesson so far -- should we keep going or go over this one more time?<\/p>";
 		dialog += "  	<button onclick=\"ClassGauge.surveyVote('yes')\" style=\"background-color:#46BFBD;color:#fff;border:none;padding:10px;font-size:18px;\">Keep going<\/button>";
 		dialog += "  	<button onclick=\"ClassGauge.surveyVote('no')\" style=\"background-color:#FDB45C;color:#fff;border:none;padding:10px;font-size:18px;\">Review<\/button>";
 		dialog += "  <\/div>";
