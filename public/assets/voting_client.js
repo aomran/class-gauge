@@ -19,19 +19,18 @@ window.ClassGauge = {
 	},
 	startSurvey: function(snapshot){
 		this.addName(snapshot.name());
-		this.overlay();
+		this.overlay('visible');
 	},
 	addName: function(name){
 		document.querySelector("#dialog-overlay").setAttribute('name', name);
 	},
-	overlay: function() {
-		var el = document.querySelector("#dialog-overlay");
-		el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+	overlay: function(visibility) {
+		document.querySelector("#dialog-overlay").style.visibility = visibility;
 	},
 	surveyVote: function(button){
 		var name = document.querySelector("#dialog-overlay").getAttribute('name');
 		var survey = this.ref.child("surveys/"+name);
-		this.overlay();
+		this.overlay('hidden');
 
 		if (button === 'yes') {
 			survey.child('yesVotes').transaction(function(votes){
