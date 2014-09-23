@@ -46,13 +46,17 @@ window.ClassGauge = {
 	addDialog: function(){
 		var dialog="";
 		dialog += "<div id=\"dialog-overlay\" style=\"visibility:hidden;position: absolute;top:0;left:0;background-color: rgba(0,0,0,0.6);width:100%;height:100%;z-index:1000\">";
-		dialog += "  <div style=\"width:400px;height:225px;position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;box-shadow:0px 2px 7px #292929;border-radius: 10px;background-color:#f2f2f2;border:1px solid #fff;padding:15px;text-align:center;\">";
-		dialog += "  	<p style=\"font-size:25px;font-family:sans-serif\">How is the lesson so far -- should we keep going or go over this one more time?<\/p>";
-		dialog += "  	<button onclick=\"ClassGauge.surveyVote('yes')\" style=\"background-color:#46BFBD;color:#fff;border:none;padding:10px;font-size:18px;\">Keep going<\/button>";
-		dialog += "  	<button onclick=\"ClassGauge.surveyVote('no')\" style=\"background-color:#FDB45C;color:#fff;border:none;padding:10px;font-size:18px;\">Review<\/button>";
+		dialog += "  <div style=\"width:400px;height:150px;position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;box-shadow:0px 2px 7px #292929;border-radius: 10px;background-color:#f2f2f2;border:1px solid #fff;padding:15px;text-align:center;\">";
+		dialog += "  	<p style=\"font-size:25px;font-family:sans-serif\">How's the lesson so far?<\/p>";
+		dialog += "  	<button id=\"cgyesbutton\" onclick=\"ClassGauge.surveyVote('yes')\" style=\"background-color:#46BFBD;color:#fff;border:none;padding:10px;font-size:18px;border-radius:5px;cursor:pointer\">Keep going!<\/button>";
+		dialog += "  	<button id=\"cgnobutton\" onclick=\"ClassGauge.surveyVote('no')\" style=\"background-color:#FDB45C;color:#fff;border:none;padding:10px;font-size:18px;border-radius:5px;cursor:pointer\">Go over it again<\/button>";
 		dialog += "  <\/div>";
 		dialog += "<\/div>";
 		document.querySelector('body').insertAdjacentHTML('afterend', dialog);
+
+		var s=document.createElement('style');
+		s.innerHTML = '#cgyesbutton:hover {background-color: #5AD3D1 !important;} #cgnobutton:hover {background-color: #FFC870 !important;}';
+		document.querySelector('head').appendChild(s);
 		return this;
 	},
 	setLessonID: function(){

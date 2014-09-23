@@ -17,7 +17,7 @@ export default DS.Model.extend({
   			value: this.get('noVotes'),
   			color: "#FDB45C",
   			highlight: "#FFC870",
-  			label: "Review"
+  			label: "Go over it again"
   		}
   	];
   }.property('yesVotes', 'noVotes')
