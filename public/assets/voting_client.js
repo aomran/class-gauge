@@ -2,19 +2,20 @@ window.ClassGauge = {
 	ref: null,
 	LESSON_ID: null,
 	init: function(){
-		ClassGauge.addDialog().setLessonID().setFirebase();
+		this.addDialog().setLessonID().setFirebase();
 
 		// Listen for survey polls
 		var surveys,
-			surveysLength,
-			first_time = true;
+		  surveysLength,
+		  first_time = true,
+      _this = this;
 		
-		surveys = ClassGauge.ref.child('lessons/'+ ClassGauge.LESSON_ID + '/surveys');
+		surveys = this.ref.child('lessons/'+ this.LESSON_ID + '/surveys');
 		surveys.once('value', function(snapshot){
 			surveysLength = snapshot.numChildren();
 		});
 		surveys.limit(1).on("child_added", function(snapshot) {
-			(first_time && surveysLength) ? (first_time = false) : ClassGauge.startSurvey(snapshot);
+			(first_time && surveysLength) ? (first_time = false) : _this.startSurvey(snapshot);
 		});
 	},
 	startSurvey: function(snapshot){
@@ -70,5 +71,5 @@ window.ClassGauge = {
 var s=document.createElement('script');
 s.type='text/javascript';
 s.src='https://cdn.firebase.com/js/client/1.0.21/firebase.js';
-s.onload = ClassGauge.init;
+s.onload = function(){ClassGauge.init();};
 document.querySelector('head').appendChild(s);
