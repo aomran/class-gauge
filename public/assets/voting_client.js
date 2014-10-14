@@ -2,46 +2,45 @@ window.ClassGauge = {
 	ref: null,
 	LESSON_ID: null,
 	init: function(){
-		this.addDialog().setLessonID().setFirebase();
-
-		// Listen for survey polls
+		this.addDialog().setLessonID().setFirebase().listenFirebase();
+	},
+	listenFirebase: function(){
 		var surveys,
 		  surveysLength,
 		  first_time = true,
-      _this = this;
+      self = this;
 		
 		surveys = this.ref.child('lessons/'+ this.LESSON_ID + '/surveys');
 		surveys.once('value', function(snapshot){
 			surveysLength = snapshot.numChildren();
 		});
+
+		// Throw out first survey on page load
+		// Listen for new surveys
 		surveys.limit(1).on("child_added", function(snapshot) {
-			(first_time && surveysLength) ? (first_time = false) : _this.startSurvey(snapshot);
+			if (first_time && surveysLength) {
+				first_time = false;
+			} else {
+				self.startSurvey(snapshot);
+			};
 		});
 	},
 	startSurvey: function(snapshot){
-		this.addName(snapshot.name());
-		this.overlay('visible');
+		this.setSurveyID(snapshot.name());
+		this.setOverlay('visible');
 	},
-	addName: function(name){
-		document.querySelector("#dialog-overlay").setAttribute('name', name);
-	},
-	overlay: function(visibility) {
-		document.querySelector("#dialog-overlay").style.visibility = visibility;
-	},
-	surveyVote: function(button){
-		var name = document.querySelector("#dialog-overlay").getAttribute('name');
-		var survey = this.ref.child("surveys/"+name);
-		this.overlay('hidden');
-
-		if (button === 'yes') {
+	surveyVote: function(choice){
+		var survey = this.ref.child("surveys/"+this.getSurveyID());
+		if (choice === 'yes') {
 			survey.child('yesVotes').transaction(function(votes){
 				return votes+1;
 			})
-		} else {
+		} else if (choice === 'no') {
 		  survey.child('noVotes').transaction(function(votes){
 		  	return votes+1;
 		  })
-		}
+		};
+		this.setOverlay('hidden');
 	},
 	addDialog: function(){
 		var dialog="";
@@ -65,7 +64,19 @@ window.ClassGauge = {
 	},
 	setFirebase: function(){
 		this.ref = new Firebase("https://class-gauge.firebaseio.com/");
+		return this;
 	},
+	setSurveyID: function(id){
+		document.querySelector("#dialog-overlay").setAttribute('surveyID', id);
+		return this;
+	},
+	getSurveyID: function(){
+		return document.querySelector("#dialog-overlay").getAttribute('surveyID');
+	},
+	setOverlay: function(visibility) {
+		document.querySelector("#dialog-overlay").style.visibility = visibility;
+		return this;
+	}
 };
 
 var s=document.createElement('script');
