@@ -51,7 +51,7 @@ window.ClassGauge = {
 		dialog += "  	<button id=\"cgnobutton\" onclick=\"ClassGauge.surveyVote('no')\" style=\"background-color:#FDB45C;color:#fff;border:none;padding:10px;font-size:18px;border-radius:5px;cursor:pointer\">Go over it again<\/button>";
 		dialog += "  <\/div>";
 		dialog += "<\/div>";
-		document.querySelector('body').insertAdjacentHTML('afterend', dialog);
+		document.querySelector('body').appendChild(dialog);
 
 		var s=document.createElement('style');
 		s.innerHTML = '#cgyesbutton:hover {background-color: #5AD3D1 !important;} #cgnobutton:hover {background-color: #FFC870 !important;}';
